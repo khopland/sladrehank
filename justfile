@@ -44,6 +44,10 @@ g_counter: build
     @echo "Running g-counter (3 nodes, 20s)"
     {{MAELSTROM}} test -w g-counter --bin "./target/debug/g_counter" --node-count 3 --rate 100 --time-limit 20 --nemesis partition
 
+KAFKA_BIN := "./target/debug/kafka"
+kafka_single: build
+    @echo "Running kafka (1 node, 20s)"
+    {{MAELSTROM}} test --workload kafka --bin {{KAFKA_BIN}} --node-count 1 --concurrency 2n --time-limit 20 --rate 1000
 
 
 serve:
