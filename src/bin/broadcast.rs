@@ -4,7 +4,7 @@ use std::{
 };
 
 use anyhow::Context;
-use maelstrom::*;
+use sladrehank::*;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 
