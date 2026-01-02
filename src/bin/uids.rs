@@ -1,5 +1,5 @@
 use anyhow::Context;
-use maelstrom_echo::*;
+use maelstrom::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -13,7 +13,7 @@ enum Payload {
     },
 }
 struct UniqueNode {
-    node:String,
+    node: String,
     id: usize,
 }
 impl Node<(), Payload> for UniqueNode {
@@ -27,7 +27,7 @@ impl Node<(), Payload> for UniqueNode {
     {
         Ok(UniqueNode {
             node: init.node_id,
-            id: 1
+            id: 1,
         })
     }
 
@@ -43,7 +43,7 @@ impl Node<(), Payload> for UniqueNode {
                     Payload::Generate => {
                         let guid = format!("{}-{}", self.node, self.id);
                         reply.body.payload = Payload::GenerateOk { guid };
-                        reply.send(output).context("send echo Ok")?;
+                        reply.send(&mut *output).context("send echo Ok")?;
                     }
                     Payload::GenerateOk { .. } => {}
                 }

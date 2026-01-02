@@ -1,5 +1,5 @@
 use anyhow::Context;
-use maelstrom_echo::*;
+use maelstrom::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -37,7 +37,7 @@ impl Node<(), Payload> for EchoNode {
                 match reply.body.payload {
                     Payload::Echo { echo } => {
                         reply.body.payload = Payload::EchoOk { echo };
-                        reply.send(output).context("send echo Ok")?;
+                        reply.send(&mut *output).context("send echo Ok")?;
                     }
                     Payload::EchoOk { .. } => {}
                 }

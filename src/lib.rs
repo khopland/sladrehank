@@ -1,5 +1,5 @@
 use anyhow::Context;
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use std::io::{BufRead, StdoutLock, Write};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
