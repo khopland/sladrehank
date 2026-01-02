@@ -11,6 +11,19 @@ pub struct Message<Payload> {
 }
 
 impl<Payload> Message<Payload> {
+    pub fn new(src: String, dst: String, id: &mut usize, payload: Payload) -> Self {
+        let mid = *id;
+        *id += 1;
+        Self {
+            src: src,
+            dst: dst,
+            body: Body {
+                id: Some(mid),
+                in_reply_to: None,
+                payload,
+            },
+        }
+    }
     pub fn into_reply(self, id: Option<&mut usize>) -> Self {
         Self {
             src: self.dst,
